@@ -12,8 +12,14 @@ count=83
 
 echo "               It's a guessing game!"
 echo "                     Begin Game!"
-echo -n "Please input you number:";read var
-# 需要做输入出错处理
+#echo -n "Please input you number:";read var
+read -p "Please input you number:" var
+# 输入出错处理
+# echo $var | grep -q '[^0-9]'  用于判断输入是否是数字其实是判断输入的字符串是否全部属于{0-9]内
+while echo $var | grep -q '[^0-9]'
+do
+	read -p "Please input a number,not string:" var
+done
 
 #判断是否猜中数字
 while true
@@ -32,7 +38,7 @@ do
 		then
 			echo "You number less than!"
 		fi
-		echo "Please input you number:";read var
+		echo -n "Please input you number:";read var
 	fi
 	count=`expr $count + 1`
 done
